@@ -1,5 +1,3 @@
-export DEFAULT_USER=juraj
-
 alias mutt="torify mutt 2>/dev/null"
 
 # Powerline!
