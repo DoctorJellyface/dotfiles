@@ -1,7 +1,11 @@
+export DEFAULT_USER=juraj
+export AGNOSTER_LIGHT=1
+alias pacman=pacmatic
+
 alias mutt="torify mutt 2>/dev/null"
 
 # Powerline!
-. /usr/share/zsh/site-contrib/powerline.zsh
+#. /usr/share/zsh/site-contrib/powerline.zsh
 
 # Syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
