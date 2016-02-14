@@ -1,6 +1,5 @@
 export DEFAULT_USER=juraj
 export AGNOSTER_LIGHT=1
-alias pacman=pacmatic
 
 alias mutt="torify mutt 2>/dev/null"
 
@@ -17,7 +16,7 @@ eval "$(thefuck --alias)"
 export CCACHE_DIR=/build/ccache
 
 # Reset swap
-alias swapclean='sudo swapoff -a && sudo swapon -a'
+alias swapclean="sudo sh -c 'swapoff -a; swapon -a'"
 
 # Fuzzy matching of completions for when you mistype them:
 
