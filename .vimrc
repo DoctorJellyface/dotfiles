@@ -17,6 +17,9 @@ set confirm
 " Use powerline symbols
 let g:airline_powerline_fonts=1
 
+" Trailing whitespace higlighting with solarized
+let g:solarized_hitrail=1
+
 " Source the vimrc file after saving it
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
@@ -41,12 +44,15 @@ if exists(":Tabularize")
 endif
 
 map <F3> :Tabularize /=<CR>
+map <F4> :Tabularize /style<CR>
 
 " Edit the vimrc
 nmap <leader>v :split $MYVIMRC<CR>
 
 " Shortcut to rapidly toggle `set list`
 nmap <Leader>l :set list!<CR>
+" Shortcut to rapidly toggle `set number`
+nmap <Leader>n :set nu!<CR>
 
 " Window switching
 map <C-h> <C-w>h

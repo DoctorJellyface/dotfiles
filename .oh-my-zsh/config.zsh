@@ -1,10 +1,7 @@
-export DEFAULT_USER=juraj
-export AGNOSTER_LIGHT=1
-
 alias mutt="torify mutt 2>/dev/null"
 
-# Powerline!
-#. /usr/share/zsh/site-contrib/powerline.zsh
+# Fix VTE functions
+. /etc/profile.d/vte.sh
 
 # Syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
