@@ -5,6 +5,13 @@
 set smartcase
 set ignorecase
 
+" Default tab width
+set ts=2
+set sw=2
+set sts=2
+set ai
+set et
+
 " Shorten the wait between mode changes
 set timeoutlen=250
 
