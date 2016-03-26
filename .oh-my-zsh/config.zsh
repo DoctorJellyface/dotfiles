@@ -9,21 +9,16 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # The fuck?
 eval "$(thefuck --alias)"
 
-# ccache dir
-export CCACHE_DIR=/build/ccache
-
 # Reset swap
 alias swapclean="sudo sh -c 'swapoff -a; swapon -a'"
 
 # Fuzzy matching of completions for when you mistype them:
-
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 # And if you want the number of errors allowed by _approximate to
 # increase with the length of what you have typed so far:
-
 zstyle -e ':completion:*:approximate:*' \
         max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
@@ -34,16 +29,13 @@ zstyle -e ':completion:*:approximate:*' \
 
 # If you end up using a directory as argument, this will remove the
 # trailing slash (usefull in ln)
-
 zstyle ':completion:*' squeeze-slashes true
 
 # cd will never select the parent directory (e.g.: cd ../<TAB>):
-
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 # Another method for quick change directories. Add this to your ~/.zshrc,
 # then just enter “cd ..../dir”
-
 rationalise-dot() {
   if [[ $LBUFFER = *.. ]]; then
     LBUFFER+=/..
