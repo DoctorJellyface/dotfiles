@@ -83,7 +83,7 @@ export CCACHE_PATH="/usr/bin"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
+ZSH_CACHE_DIR=$HOME/.oh-my-zsh/cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
