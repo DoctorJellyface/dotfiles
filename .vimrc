@@ -1,6 +1,16 @@
-" ----------------------------------------------------------------------- "
-"                               SETTINGS                                  "
-" ----------------------------------------------------------------------- "
+"                              ----------                                 "
+" ----------------------------- SETTINGS -------------------------------- "
+"                              ----------                                 "
+
+" Solarized! Also, default to day mode
+colorscheme solarized
+set background=light
+
+" Numbers are useful
+set number
+
+" Always show the status bar
+set laststatus=2
 
 " Use case insensitive search, except when using capital letters
 set smartcase
@@ -16,14 +26,23 @@ set expandtab
 " Shorten the wait between mode changes
 set timeoutlen=250
 
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
 " Ask instead of complaining
 set confirm
 
-" Use powerline symbols
-let g:airline_powerline_fonts=1
+" Work-around the fact that when this is going to be used
+" in a Windows environment it's going to suck
+if has('gui_win32')
+  " Use a usable font availbe on most machines
+  set guifont=Courier\ New:h11
+
+else
+  " Use powerline symbols
+  let g:airline_powerline_fonts=1
+
+  " Symbolize symbols
+  set listchars=tab:▸\ ,eol:↵
+
+endif
 
 " Trailing whitespace higlighting with solarized
 let g:solarized_hitrail=1
@@ -32,9 +51,6 @@ let g:solarized_hitrail=1
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
-
-" Clear search when pressing escape
-nnoremap <CR> :let @/ = "" <bar> echo "hľadaný výraz vyčistený" <CR>
 
 " Cursor line is nice
 set cursorline
@@ -47,9 +63,22 @@ if has("autocmd")
   autocmd InsertLeave * set cursorline
 endif
 
-" ----------------------------------------------------------------------- "
-"                               MAPPINGS                                  "
-" ----------------------------------------------------------------------- "
+"                              ----------                                 "
+" ----------------------------- MAPPINGS ------------------------------   "
+"                              ----------                                 "
+
+" Clear search when pressing escape
+nnoremap <CR> :let @/ = "" <bar> echo "hľadaný výraz vyčistený" <CR>
+
+" Window switching
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" ---------------------- "
+" -- Leader shortcuts -- "
+" ---------------------- "
 
 " Use the colon as a mapleader
 let mapleader=","
@@ -77,16 +106,11 @@ endif
 " Edit the vimrc
 nmap <leader>v :split $MYVIMRC<CR>
 
-" Shortcut to rapidly toggle `set list`
+" Toggle invisibles
 nmap <Leader>l :set list!<CR>
-" Shortcut to rapidly toggle `set number`
-nmap <Leader>n :set nu!<CR>
+"
+" Toggle numbers
+nmap <Leader>n :set number!<CR>
 
 " Quickly edit macros
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
-
-" Window switching
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
