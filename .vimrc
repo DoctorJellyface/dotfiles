@@ -8,6 +8,7 @@ set background=light
 
 " Numbers are useful
 set number
+set relativenumber
 
 " Always show the status bar
 set laststatus=2
