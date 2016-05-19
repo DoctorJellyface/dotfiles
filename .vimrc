@@ -55,6 +55,10 @@ set softtabstop=2
 set autoindent
 set expandtab
 
+" Make line scrolling less of a pain
+set scrolloff=3
+set sidescrolloff=5
+
 " Shorten the wait between mode changes
 set timeoutlen=250
 
