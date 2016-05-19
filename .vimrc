@@ -1,3 +1,34 @@
+"                               ----------                                 "
+" ------------------------------ VimPlug -------------------------------- "
+"                               ----------                                 "
+
+" Load plugins
+"if exists(":PlugInstall")
+  call plug#begin('~/.vim/plugged')
+
+  " Solarized!
+  Plug 'altercation/vim-colors-solarized'
+
+  " Airline
+  Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " You need to align stuff evey now and then
+  Plug 'godlygeek/tabular'
+
+  " Comes in handy
+  Plug 'scrooloose/syntastic'
+
+  " Syntax
+  Plug 'chikamichi/mediawiki.vim'
+  Plug 'matt-deacalion/vim-systemd-syntax'
+
+  " GnuPG
+  Plug 'jamessan/vim-gnupg'
+
+  call plug#end()
+"endif
+
 "                              ----------                                 "
 " ----------------------------- SETTINGS -------------------------------- "
 "                              ----------                                 "
