@@ -50,7 +50,18 @@ ZSH_CUSTOM=~/.oh-my-zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found copyfile rsync dirhistory extract history torrent sudo archlinux systemd)
+plugins=(
+  git
+  command-not-found
+  copyfile
+  rsync
+  dirhistory
+  extract
+  history
+  sudo
+  archlinux
+  systemd
+)
 
 # User configuration
 export PATH="/usr/lib/colorgcc/bin/:$HOME/bin:/usr/local/bin:$PATH"
