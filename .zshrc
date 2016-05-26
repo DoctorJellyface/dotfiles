@@ -69,6 +69,14 @@ export CCACHE_PATH="/usr/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# Override oh-my-zsh cache dir so it's not it /usr
+ZSH_CACHE_DIR=$HOME/.oh-my-zsh/cache
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -93,10 +101,3 @@ export CCACHE_PATH="/usr/bin"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-ZSH_CACHE_DIR=$HOME/.oh-my-zsh/cache
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
-
-source $ZSH/oh-my-zsh.sh
