@@ -1,103 +1,81 @@
-# Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+# Fix VTE functions
+source /etc/profile.d/vte.sh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="agnoster"
-ZSH_THEME="robbyrussell"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="dd.mm.yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=~/.oh-my-zsh
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  command-not-found
-  copyfile
-  rsync
-  dirhistory
-  extract
-  history
-  sudo
-  archlinux
-  systemd
-)
-
-# User configuration
+# Colors, caches!
 export PATH="/usr/lib/colorgcc/bin/:$HOME/bin:/usr/local/bin:$PATH"
 export CCACHE_PATH="/usr/bin"
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Command not found!
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
-# Override oh-my-zsh cache dir so it's not it /usr
-ZSH_CACHE_DIR=$HOME/.oh-my-zsh/cache
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
+# The fuck?
+eval "$(thefuck --alias)"
 
-source $ZSH/oh-my-zsh.sh
+# Fix Bundler
+GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# Speed up Wine
+export WINEDEBUG=-all
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Reset swap
+alias swapclean="sudo sh -c 'swapoff -a; swapon -a'"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# No more frustration with directories
+md() {
+  mkdir -p "$1" && cd "$1";
+}
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+ZPLUG_HOME=~/.local/share/zplug
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+source ~/.local/share/zplug/init.zsh
+
+# Build upon Zim
+zplug "Eriner/zim"
+
+# Zim hasn't got these built-in
+zplug "zsh-users/zsh-autosuggestions"
+zplug "plugins/systemd",   from:oh-my-zsh
+zplug "plugins/archlinux", from:oh-my-zsh
+zplug "plugins/sudo",      from:oh-my-zsh
+
+# No local plugins yet
+#zplug "~/.zsh", from:local
+
+# Let's speed up the process and disable this
+# Install plugins if there are plugins that have not been installed
+#if ! zplug check --verbose; then
+    #printf "Install? [y/N]: "
+    #if read -q; then
+        #echo; zplug install
+    #fi
+#fi
+
+# Then, source plugins and add commands to $PATH
+zplug load #--verbose
+
+# Neither too bright, neither too cold
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg\=244
+
+# Shorter wait on changing modes
+KEYTIMEOUT=25
+
+# Change the prompt when in normal mode
+VIM_PROMPT="❯"
+PROMPT='%(?.%F{magenta}.%F{red})${VIM_PROMPT}%f '
+
+prompt_pure_update_vim_prompt() {
+  zle || {
+    print "error: pure_update_vim_prompt must be called when zle is active"
+    return 1
+  }
+  VIM_PROMPT=${${KEYMAP/vicmd/%S❯%s}/(main|viins)/❯}
+  zle .reset-prompt
+}
+
+function zle-line-init zle-keymap-select { 
+    prompt_pure_update_vim_prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+bindkey -s '\el' 'ls\n' 
