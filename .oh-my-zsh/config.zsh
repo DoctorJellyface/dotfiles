@@ -1,4 +1,4 @@
-alias mutt="torify mutt 2>/dev/null"
+#alias mutt="torify mutt 2>/dev/null"
 
 # Fix VTE functions
 . /etc/profile.d/vte.sh
@@ -8,6 +8,9 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # The fuck?
 eval "$(thefuck --alias)"
+
+# Fix Bundler
+export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 # Reset swap
 alias swapclean="sudo sh -c 'swapoff -a; swapon -a'"

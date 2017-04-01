@@ -6,6 +6,9 @@
 "if exists(":PlugInstall")
   call plug#begin('~/.vim/plugged')
 
+  " Start of something sensible
+  Plug 'tpope/vim-sensible'
+
   " Solarized!
   Plug 'altercation/vim-colors-solarized'
 
@@ -20,11 +23,21 @@
   Plug 'scrooloose/syntastic'
 
   " Syntax
+  Plug 'plasticboy/vim-markdown'
   Plug 'chikamichi/mediawiki.vim'
   Plug 'matt-deacalion/vim-systemd-syntax'
+  Plug 'rust-lang/rust.vim'
 
   " GnuPG
   Plug 'jamessan/vim-gnupg'
+
+  " C#
+  Plug 'omnisharp/omnisharp-vim'
+  Plug 'shougo/vimproc.vim'
+
+  " Writing
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
 
   call plug#end()
 "endif
@@ -33,16 +46,15 @@
 " ----------------------------- SETTINGS -------------------------------- "
 "                              ----------                                 "
 
-" Solarized! Also, default to day mode
+" Solarized!
 colorscheme solarized
+
+" Non-emo mode
 set background=light
 
 " Numbers are useful
 set number
 set relativenumber
-
-" Always show the status bar
-set laststatus=2
 
 " Use case insensitive search, except when using capital letters
 set smartcase
@@ -52,18 +64,19 @@ set ignorecase
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set autoindent
 set expandtab
 
 " Make line scrolling less of a pain
 set scrolloff=3
-set sidescrolloff=5
 
-" Shorten the wait between mode changes
+" Lengthen the wait to be able to use leader commands
 set timeoutlen=250
 
 " Ask instead of complaining
 set confirm
+
+" Avoid trouble with Markdown lists
+set flp+=\\\|^\\*\\s*
 
 " Work-around the fact that when this is going to be used
 " in a Windows environment it's going to suck
@@ -144,9 +157,14 @@ nmap <leader>v :split $MYVIMRC<CR>
 
 " Toggle invisibles
 nmap <Leader>l :set list!<CR>
-"
+
 " Toggle numbers
-nmap <Leader>n :set number!<CR>
+nmap <Leader>n :set number! relativenumber!<CR>
+
+" Writing mode
+nmap <Leader>g :Goyo<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Quickly edit macros
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
